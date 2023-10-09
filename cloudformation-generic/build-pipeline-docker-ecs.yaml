@@ -10,7 +10,7 @@ Parameters:
   RepositoryOwner:
     Type: String
     Description: The owner of the GitHub repository.
-    Default: S-Polimetla
+    Default: ShouYuqing
   RepositoryName:
     Type: String
     Description: The name of the GitHub repository.
@@ -22,7 +22,7 @@ Parameters:
   DockerImageRepository: # Should be the same as 'DockerImageRepository' in config.json
     Type: String
     Description: The name of the ECR Repository  
-    Default: employee-ecs-image
+    Default: employee-ecs-image2
 
 Resources:
 
@@ -43,7 +43,7 @@ Resources:
                 Owner: !Ref RepositoryOwner
                 Repo: !Ref RepositoryName
                 Branch: !Ref RepositoryBranch
-                OAuthToken: "{{resolve:ssm:/github/AuthToken:1}}" # Should be changed
+                OAuthToken: "{{resolve:ssm:/github/aws_access_token:1}}" # Should be changed
               OutputArtifacts:
               - Name: SourceOutput
         - Name: Build
@@ -160,11 +160,11 @@ Resources:
           - Name: ECR_REPO
             Value: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${DockerImageRepository}      
 
-  ECRRepository:
+  ECRRepository2:
     Type: AWS::ECR::Repository
     Properties:
-      ImageScanningConfiguration:
-        scanOnPush: true
+#      ImageScanningConfiguration:
+#        scanOnPush: true
       RepositoryName: !Ref DockerImageRepository
       LifecyclePolicy:
         LifecyclePolicyText: "{\"rules\":[{\"rulePriority\":1,\"description\":\"Maintain maximum of 5 versions\",\"selection\":{\"tagStatus\":\"any\",\"countType\":\"imageCountMoreThan\",\"countNumber\":5},\"action\":{\"type\":\"expire\"}}]}"

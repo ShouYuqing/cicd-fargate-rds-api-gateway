@@ -1,6 +1,6 @@
 {
   "Parameters": {
-    "DockerImageRepository": "employee-ecs-image",
+    "DockerImageRepository": "employee-ecs-image2",
     "ImageTag": "latest",
     "NetworkStackName": "network-config",
     "Stage": "dev"
