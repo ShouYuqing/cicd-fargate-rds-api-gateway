@@ -25,7 +25,11 @@ Parameters:
     Default: employee-ecs-image
 
 Resources:
-
+################################################################
+#
+#  create Infrastructure: pipeline, iam role, etc
+#
+################################################################
   CodePipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
