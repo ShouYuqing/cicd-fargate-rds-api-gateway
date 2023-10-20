@@ -1,6 +1,13 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Template for creating VPC and other network infrastructure
 
+Parameters:
+  NetworkName:
+    Type: String
+    Description: The name of the network.
+    Default: network-config
+
+
 Resources:
 
   VPC:
@@ -84,32 +91,62 @@ Resources:
 
 Outputs:
 
+#  VPC:
+#    Description: The ID of the VPC created
+#    Value: !Ref VPC
+#    Export:
+#      Name: !Sub ${AWS::StackName}-VPC
+#
+#  Subnet1:
+#    Description: Subnet1
+#    Value: !Ref Subnet1
+#    Export:
+#      Name: !Sub ${AWS::StackName}-subnet1
+#
+#  Subnet2:
+#    Description: Subnet2
+#    Value: !Ref Subnet2
+#    Export:
+#      Name: !Sub ${AWS::StackName}-subnet2
+#
+#  LoadBalancerSecurityGroup:
+#    Description: LoadBalancerSecurityGroup
+#    Value: !Ref LoadBalancerSecurityGroup
+#    Export:
+#      Name: !Sub ${AWS::StackName}-ELB-SG
+#
+#  ContainerSecurityGroup:
+#    Description: ContainerSecurityGroup
+#    Value: !Ref ContainerSecurityGroup
+#    Export:
+#      Name: !Sub ${AWS::StackName}-container-SG
+
   VPC:
     Description: The ID of the VPC created
     Value: !Ref VPC
     Export:
-      Name: !Sub ${AWS::StackName}-VPC
+      Name: !Sub ${NetworkName}-VPC
 
   Subnet1:
     Description: Subnet1
     Value: !Ref Subnet1
     Export:
-      Name: !Sub ${AWS::StackName}-subnet1
+      Name: !Sub ${NetworkName}-subnet1
 
   Subnet2:
     Description: Subnet2
     Value: !Ref Subnet2
     Export:
-      Name: !Sub ${AWS::StackName}-subnet2
+      Name: !Sub ${NetworkName}-subnet2
 
   LoadBalancerSecurityGroup:
     Description: LoadBalancerSecurityGroup
     Value: !Ref LoadBalancerSecurityGroup
     Export:
-      Name: !Sub ${AWS::StackName}-ELB-SG
+      Name: !Sub ${NetworkName}-ELB-SG
 
   ContainerSecurityGroup:
     Description: ContainerSecurityGroup
     Value: !Ref ContainerSecurityGroup
     Export:
-      Name: !Sub ${AWS::StackName}-container-SG
+      Name: !Sub ${NetworkName}-container-SG
