@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Template for generating AWS parameters store
+# This is used for generation parameterstore in AWS
+
+Parameters:
+  Stage:
+    Type: String
+    Description: The environment of deployment
+    Default: "dev"
+    AllowedValues: [ dev, prod ]
+
+Resources:
+  DBName:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Sub /DataBaseCredentials/${Stage}/dbname
+      Type: "String"
+      Value: "mysql-instance-ecs"
+      Description: "Description of my parameter"
+#      Tags:
+#        - Key: "Application"
+#          Value: "MyApp"
+
+  MasterUsername:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Sub /DataBaseCredentials/${Stage}/username
+      Type: "String"
+      Value: "username"
+      Description: "Description of my parameter"
+#      Tags:
+#        - Key: "Application"
+#          Value: "MyApp"
+
+
+  MasterUserPassword:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Sub /DataBaseCredentials/${Stage}/password
+      Type: "String"
+      Value: "12345"
+      Description: "Description of my parameter"
+#      Tags:
+#        - Key: "Application"
+#          Value: "MyApp"
+
+Outputs:
+  DBName:
+    Description: "Name of the created parameter"
+    Value: !Ref DBName
+
+  MasterUsername:
+    Description: "Name of the created parameter"
+    Value: !Ref MasterUsername
+
+  MasterUserPassword:
+    Description: "Name of the created parameter"
+    Value: !Ref MasterUserPassword
