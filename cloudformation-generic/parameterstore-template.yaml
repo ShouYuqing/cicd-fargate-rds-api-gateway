@@ -44,6 +44,17 @@ Resources:
 #        - Key: "Application"
 #          Value: "MyApp"
 
+  DB_HOST:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Sub /DataBaseCredentials/${Stage}/host
+      Type: "String"
+      Value: "mysql-service-dev.aws"
+      Description: "Description of my parameter"
+#      Tags:
+#        - Key: "Application"
+#          Value: "MyApp"
+
 Outputs:
   DBName:
     Description: "Name of the created parameter"
@@ -56,3 +67,7 @@ Outputs:
   MasterUserPassword:
     Description: "Name of the created parameter"
     Value: !Ref MasterUserPassword
+
+  DB_HOST:
+    Description: "Name of the created parameter"
+    Value: !Ref DB_HOST
